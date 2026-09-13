@@ -1,8 +1,9 @@
 /* ---------------------------------------------------------------------------
    THE ONLY FILE YOU EDIT.
 
-   One block per month. Copy the whole block, change the key, edit the numbers.
-   The page works out the month-on-month changes itself — don't calculate them.
+   One block per reporting period. Copy the whole block, change the key, edit
+   the numbers. The page works out the period-on-period changes itself — don't
+   calculate them.
 
    Leave anything you don't know as null. The page shows a dash rather than a
    wrong number, which is always the better option in front of Joe.
@@ -11,51 +12,78 @@
      click-through rate   (clicks ÷ impressions)
      cost per click       (spend ÷ clicks)
      cost per enquiry     (spend ÷ enquiries)
+
+   NOTE ON PERIODS: Google Ads reports on a rolling 30-day window, not calendar
+   months. The keys below sort the periods; the labels say what the window
+   actually was. Keep doing it that way — a full month against a part month
+   produces a comparison that looks alarming and means nothing.
 --------------------------------------------------------------------------- */
 
 window.REPORT = {
 
   updated: "2026-09-13",
-  current: "2026-09",          // which month the page opens on
+  current: "2026-09",          // which period the page opens on
 
   months: {
 
-    "2026-09": {
-      label: "September 2026",
+    /* ===================================================================== */
+    "2026-07": {
+      label: "15 Jun – 14 Jul",
+      live: true,
+      headline: "",
+      ads: {
+        spend: 164, impressions: 2200, clicks: 227, conversions: null,
+        tracked: false,
+        note: "No conversion tracking in this period, so there's no record of " +
+              "what any of these clicks led to."
+      },
+      enquiries: { total: null, booked: null, byChannel: {} },
+      terms: [], changes: [], insights: [], activity: [], next: []
+    },
 
-      // Set to true once there are real ad figures in here.
+    /* ===================================================================== */
+    "2026-08": {
+      label: "15 Jul – 13 Aug",
+      live: true,
+      headline: "",
+      ads: {
+        spend: 301, impressions: 4400, clicks: 405, conversions: null,
+        tracked: false,
+        note: "The busiest period of the three — and still no way of telling " +
+              "which of those 405 clicks was worth having."
+      },
+      enquiries: { total: null, booked: null, byChannel: {} },
+      terms: [], changes: [], insights: [], activity: [], next: []
+    },
+
+    /* ===================================================================== */
+    "2026-09": {
+      label: "14 Aug – 12 Sep",
       live: true,
 
-      // The paragraph Joe actually reads. Write it last. Plain English.
       headline:
-        "Your £248 bought 346 clicks last month — that's a lot of people, at " +
-        "about 72p each, which is cheap for this sort of work. So the money " +
-        "isn't being wasted on expensive clicks. It's that 346 visits should be " +
-        "producing more than a handful of enquiries, which points at who is " +
-        "clicking rather than what they cost. Exactly what you suspected. " +
+        "Over the last three months your ads have had 978 clicks and cost £713. " +
+        "That's a lot of people arriving at your website — about eleven a day. " +
+        "The cost per click has barely moved, around 72p, which is cheap for " +
+        "this sort of work, so nobody's overcharging you. The question is what " +
+        "those 978 people did next, and at the moment nothing in the account " +
+        "can tell us. That's the gap worth closing first. " +
         "I've also been through the website: six of your ten pages tell Google " +
         "they're about the same thing, and your nineteen five-star reviews are " +
         "invisible to it entirely.",
 
       ads: {
-        spend: 248,
-        impressions: 3540,
-        clicks: 346,
-        conversions: null,
-        tracked: false,        // is the ads account recording enquiries yet?
+        spend: 248, impressions: 3540, clicks: 346, conversions: null,
+        tracked: false,
         note: "Conversion tracking isn't set up, so the account can't tell which " +
               "of those 346 clicks led anywhere. Until it can, Google is " +
               "optimising for clicks rather than enquiries — and it's very good " +
               "at getting clicks."
       },
 
-      enquiries: {
-        total: 0,
-        booked: 0,
-        byChannel: { phone: 0, form: 0, email: 0, other: 0 }
-      },
+      enquiries: { total: null, booked: null, byChannel: {} },
 
-      // The website side. All of this is measured from the live site.
+      // The website side. All measured from the live site.
       // status: "ok" | "poor" | "none"
       website: {
         checked: "2026-09-13",
@@ -85,23 +113,27 @@ window.REPORT = {
               "roughly the same, so it ranks for none of them."
       },
 
-      // What people actually typed before your ad appeared.
-      // verdict: "useful" | "wasted" | "unclear"
       terms: [],
-
-      // What was changed in the account this month.
       changes: [],
 
       insights: [
         {
-          title: "346 clicks is a lot of people for £248",
-          body: "At 72p a click you're getting plenty of traffic — the problem " +
-                "isn't the price. Nearly one in ten people who see your ad click " +
-                "it, which is a high rate and usually means the ads are appearing " +
-                "for broad searches that sound relevant but aren't. My working " +
-                "theory is you're paying for people researching autism generally, " +
-                "or looking for the NHS route, rather than people ready to book " +
-                "privately. The search terms report will settle it."
+          title: "978 clicks in three months, and we don't know what happened to any of them",
+          body: "That's the headline, really. Nearly a thousand people have " +
+                "arrived at your website from an ad since mid-June. If even a " +
+                "couple of those became assessments the advertising has paid for " +
+                "itself many times over — but nothing currently records it, so " +
+                "neither of us can say. Fixing that is worth more than any " +
+                "amount of fiddling with the ads themselves."
+        },
+        {
+          title: "Your clicks are cheap, which rules out the obvious worry",
+          body: "72p a click, steady across all three months. I'd have guessed " +
+                "two or three times that for this sort of work. So you're not " +
+                "being stung on price — whatever's going wrong is about who's " +
+                "clicking, not what they cost. Nearly one in ten people who see " +
+                "your ad click it, which is high, and usually means the ads are " +
+                "appearing for broad searches that sound relevant but aren't."
         },
         {
           title: "Your hunch about conversion tracking was right",
@@ -117,19 +149,14 @@ window.REPORT = {
                 "contact lists are off the table. If an agency ever offers you " +
                 "either, they haven't read the policy. It also means getting the " +
                 "search targeting right is the whole game — there's no second bite."
-        },
-        {
-          title: "One assessment pays for seven months of advertising",
-          body: "At £248 a month against a £1,895 assessment, the ad spend isn't " +
-                "really the thing to worry about. Two bookings a year and it has " +
-                "already paid for itself several times over. Worth keeping in " +
-                "proportion before we go optimising anything."
         }
       ],
 
       activity: [
         { date: "2026-09-13", minutes: 90,
           summary: "Went through all ten pages of the site. Six share an identical main heading; three share one description. Full fix list written up." },
+        { date: "2026-09-13", minutes: 40,
+          summary: "Pulled three months of figures out of the ads account so there's something to compare against from now on." },
         { date: "2026-09-13", minutes: 30,
           summary: "Looked into the conversion tracking problem you raised. Confirmed it's a genuine GoDaddy restriction, not a setup error." },
         { date: "2026-09-13", minutes: 20,
@@ -144,26 +171,5 @@ window.REPORT = {
         "Set up the Google Business Profile so the nineteen reviews start counting"
       ]
     }
-
-    /* ---------------------------------------------------------------------
-       NEXT MONTH — copy this, uncomment, fill in:
-
-    ,"2026-10": {
-      label: "October 2026",
-      live: true,
-      headline: "",
-      ads: { spend: null, impressions: null, clicks: null, conversions: null,
-             tracked: false, note: "" },
-      enquiries: { total: 0, booked: 0, byChannel: { phone:0, form:0, email:0, other:0 } },
-      terms: [
-        // { term: "private autism assessment lincoln", clicks: 9, cost: 22, verdict: "useful" },
-        // { term: "free autism test online",          clicks: 6, cost: 14, verdict: "wasted" }
-      ],
-      changes: [],
-      insights: [],
-      activity: [],
-      next: []
-    }
-    --------------------------------------------------------------------- */
   }
 };

@@ -5,6 +5,201 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow, noarchive">
 <title>Priestley Practice — Search &amp; Ads</title>
+<!-- ==========================================================================
+     THE DATA. This is the only part you edit.
+
+     Everything below the </script> that closes this block is the page itself
+     and rarely needs touching. Edit the numbers here, save, and open the file
+     to see the result. Push to GitHub when you want Joe to see it.
+     ========================================================================== -->
+<script>
+/* ---------------------------------------------------------------------------
+   THE ONLY FILE YOU EDIT.
+
+   One block per reporting period. Copy the whole block, change the key, edit
+   the numbers. The page works out the period-on-period changes itself — don't
+   calculate them.
+
+   Leave anything you don't know as null. The page shows a dash rather than a
+   wrong number, which is always the better option in front of Joe.
+
+   Derived automatically, so don't fill them in:
+     click-through rate   (clicks ÷ impressions)
+     cost per click       (spend ÷ clicks)
+     cost per enquiry     (spend ÷ enquiries)
+
+   NOTE ON PERIODS: Google Ads reports on a rolling 30-day window, not calendar
+   months. The keys below sort the periods; the labels say what the window
+   actually was. Keep doing it that way — a full month against a part month
+   produces a comparison that looks alarming and means nothing.
+--------------------------------------------------------------------------- */
+
+window.REPORT = {
+
+  updated: "2026-09-13",
+  current: "2026-09",          // which period the page opens on
+
+  months: {
+
+    /* ===================================================================== */
+    "2026-07": {
+      label: "15 Jun – 14 Jul",
+      live: true,
+      headline: "",
+      ads: {
+        spend: 164, impressions: 2200, clicks: 227, conversions: null,
+        tracked: false,
+        note: "No conversion tracking in this period, so there's no record of " +
+              "what any of these clicks led to."
+      },
+      enquiries: { total: null, booked: null, byChannel: {} },
+      terms: [], changes: [], insights: [], activity: [], next: []
+    },
+
+    /* ===================================================================== */
+    "2026-08": {
+      label: "15 Jul – 13 Aug",
+      live: true,
+      headline: "",
+      ads: {
+        spend: 301, impressions: 4400, clicks: 405, conversions: null,
+        tracked: false,
+        note: "The busiest period of the three — and still no way of telling " +
+              "which of those 405 clicks was worth having."
+      },
+      enquiries: { total: null, booked: null, byChannel: {} },
+      terms: [], changes: [], insights: [], activity: [], next: []
+    },
+
+    /* ===================================================================== */
+    "2026-09": {
+      label: "14 Aug – 12 Sep",
+      live: true,
+
+      headline:
+        "The short version: people are finding you perfectly well. Over the last " +
+        "three months your ads brought 978 clicks for £713, your Google business " +
+        "listing is getting around 559 views a month on top of that, you come up " +
+        "on page one for the searches that matter, and you've got twenty " +
+        "five-star reviews. None of that is broken. " +
+        "What nobody can currently tell you is what any of those people did after " +
+        "they arrived — because nothing is counting. That's the real gap, and " +
+        "it's why the enquiry numbers below are blank rather than zero. " +
+        "The website itself has some tidying to do, but it's housekeeping " +
+        "compared to that.",
+
+      ads: {
+        spend: 248, impressions: 3540, clicks: 346, conversions: null,
+        tracked: false,
+        note: "Conversion tracking isn't set up, so the account can't tell which " +
+              "of those 346 clicks led anywhere. Until it can, Google is " +
+              "optimising for clicks rather than enquiries — and it's very good " +
+              "at getting clicks."
+      },
+
+      enquiries: { total: null, booked: null, byChannel: {} },
+
+      // The website side. All measured from the live site.
+      // status: "ok" | "poor" | "none"
+      website: {
+        checked: "2026-09-13",
+        pages: 10,
+        ranking: "Both your home page and services page come up on the first " +
+                 "page of Google for \"private autism assessment Lincolnshire\" " +
+                 "— against NHS trusts and established clinics. That's a good " +
+                 "starting position, not a problem to fix.",
+        checks: [
+          { label: "Pages loading properly",        got: 10, of: 10, status: "ok",
+            note: "No broken pages." },
+          { label: "Pages with their own main heading", got: 4, of: 10, status: "poor",
+            note: "Six pages share one identical heading, so Google can't tell what each is about." },
+          { label: "Pages with a unique title",     got: 7, of: 10, status: "poor",
+            note: "Services, Fees and Contact all show the same title in search results." },
+          { label: "Pages with a proper description", got: 6, of: 10, status: "poor",
+            note: "Three use a 30-character description; Meet the Team has none at all." },
+          { label: "Pages Google can read properly", got: 0, of: 10, status: "none",
+            note: "No structured data anywhere — Google is guessing at what the practice does." },
+          { label: "Google business listing",       got: 20, of: 20, status: "ok",
+            note: "Claimed, complete, and carrying twenty reviews at a straight 5.0. Around 559 views a month. This is in good shape." }
+        ],
+        best: "Your Q&A page is the strongest thing on the site — around 1,200 " +
+              "words answering ten real questions, and properly structured. It's " +
+              "the model the other pages should follow.",
+        thin: "Fees is about 85 words and Areas Covered lists eleven towns in " +
+              "roughly the same, so it ranks for none of them."
+      },
+
+      terms: [],
+      changes: [],
+
+      insights: [
+        {
+          title: "978 clicks in three months, and we don't know what happened to any of them",
+          body: "That's the headline, really. Nearly a thousand people have " +
+                "arrived at your website from an ad since mid-June, plus roughly " +
+                "559 a month looking at your Google listing. If even a couple of " +
+                "those became assessments the advertising has paid for itself " +
+                "many times over — but nothing currently records it, so neither " +
+                "of us can say. Fixing that is worth more than any amount of " +
+                "fiddling with the ads themselves."
+        },
+        {
+          title: "Your Google listing is already doing its job",
+          body: "I'd assumed this would be the big win and it isn't — you're " +
+                "already on top of it. The profile is claimed, the information " +
+                "is complete, and it carries twenty reviews at a straight 5.0, " +
+                "which is genuinely rare. It's picking up around 559 views a " +
+                "month. Nothing needed here beyond keeping it ticking over and " +
+                "asking the occasional happy family for a review."
+        },
+        {
+          title: "Your clicks are cheap, which rules out the obvious worry",
+          body: "72p a click, steady across all three months. I'd have guessed " +
+                "two or three times that for this sort of work. So you're not " +
+                "being stung on price — whatever's going wrong is about who's " +
+                "clicking, not what they cost. Nearly one in ten people who see " +
+                "your ad click it, which is high, and usually means the ads are " +
+                "appearing for broad searches that sound relevant but aren't."
+        },
+        {
+          title: "Your hunch about conversion tracking was right",
+          body: "GoDaddy's website builder won't let you add tracking code where " +
+                "Google Ads normally needs it. It's a real limitation, not " +
+                "something you've set up wrong. There are routes around it using " +
+                "the Google settings already in your dashboard, and that's job one."
+        },
+        {
+          title: "Following visitors around the web isn't allowed here",
+          body: "Google restricts personalised advertising for health conditions, " +
+                "and autism is explicitly covered. So retargeting and uploading " +
+                "contact lists are off the table. If an agency ever offers you " +
+                "either, they haven't read the policy. It also means getting the " +
+                "search targeting right is the whole game — there's no second bite."
+        }
+      ],
+
+      activity: [
+        { date: "2026-09-13", minutes: 90,
+          summary: "Went through all ten pages of the site. Six share an identical main heading; three share one description. Full fix list written up." },
+        { date: "2026-09-13", minutes: 40,
+          summary: "Pulled three months of figures out of the ads account so there's something to compare against from now on." },
+        { date: "2026-09-13", minutes: 30,
+          summary: "Looked into the conversion tracking problem you raised. Confirmed it's a genuine GoDaddy restriction, not a setup error." },
+        { date: "2026-09-13", minutes: 20,
+          summary: "Checked Google's advertising rules for health services, so we don't build something that gets rejected later." },
+        { date: "2026-08-16", minutes: 60,
+          summary: "Tracked down the Google error emails. A GoDaddy sign-up page was switched on but never published. Turned off — the error clears itself." }
+      ],
+
+      next: [
+        "Pull the search terms report and find out what those 346 clicks were actually searching for",
+        "Work out how much conversion tracking we can get working on GoDaddy, so we finally know what the traffic does",
+        "Fix the six pages that all claim to be about the same thing"
+      ]
+    }
+  }
+};
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Karla:wght@400;500;700&display=swap">
@@ -106,7 +301,7 @@
 
   /* history chart */
   .chart{display:flex;flex-direction:column;gap:9px}
-  .mrow{display:grid;grid-template-columns:4.6rem 1fr auto;gap:11px;align-items:center}
+  .mrow{display:grid;grid-template-columns:7.4rem 1fr auto;gap:11px;align-items:center}
   .mrow .ml{font-size:.83rem;color:var(--muted);font-variant-numeric:tabular-nums}
   .track{display:flex;gap:2px;height:19px}
   .seg{border-radius:3px;min-width:5px}
@@ -137,11 +332,31 @@
          display:flex;flex-direction:column;gap:4px}
   [hidden]{display:none!important}
 
+  /* removable pitch block */
+  .pitch{background:var(--green-sf);border:1px solid var(--rule);border-left:3px solid var(--green);
+         border-radius:0 6px 6px 0;padding:20px 22px;display:flex;flex-direction:column;gap:11px}
+  .pitch h2{font-size:1.15rem}
+  .pitch p{font-size:.95rem}
+  a.pitchlink{display:inline-block;background:var(--green);color:var(--card);text-decoration:none;
+              font-weight:700;font-size:.92rem;padding:9px 20px;border-radius:5px;margin-top:2px}
+  a.pitchlink:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+
+
+  .sitenav{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;
+           padding:14px 18px 0;background:var(--paper)}
+  .sitenav a{font-family:var(--sans);font-size:.82rem;font-weight:700;text-decoration:none;
+             letter-spacing:.04em;padding:5px 15px;border-radius:20px;
+             border:1px solid var(--rule);color:var(--muted);background:var(--card)}
+  .sitenav a[aria-current="page"]{background:var(--green);border-color:var(--green);color:var(--card)}
+  .sitenav a:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+
+
   @media (min-width:560px){.tiles{grid-template-columns:repeat(3,1fr)}}
   @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
+<nav class="sitenav"><a href="./" aria-current="page">The numbers</a><a href="proposal.html">Proposal</a></nav>
 <div class="page">
 
   <header>
@@ -207,13 +422,20 @@
     <ol class="next" id="next"></ol>
   </section>
 
+  <!-- ===== REMOVE THIS BLOCK once Joe has said yes ===== -->
+  <section class="pitch">
+    <h2>So — want me to take this off your hands?</h2>
+    <p>There's a page explaining what I'd actually do about all of the above, how long it'd take, and what I'd need from you. One page, no jargon.</p>
+    <p><a class="pitchlink" href="proposal.html">Read the proposal &rarr;</a></p>
+  </section>
+  <!-- ===== END removable block ===== -->
+
   <footer>
     <span>Priestley Psychological Services &middot; prepared by Andrew</span>
     <span>Private page &mdash; kept out of search results. No client names recorded here.</span>
   </footer>
 </div>
 
-<script src="data.js"></script>
 <script>
 (function () {
   var R = window.REPORT || {};
@@ -289,7 +511,9 @@
       ? "Compared with " + (M[prevKey].label || prevKey) + "."
       : "First month on record, so there's nothing to compare against yet.";
 
-    var d = function (a, b, dir) { return prev ? delta(a, b, dir) : '<span class="delta f">—</span>'; };
+    var d = function (a, b, dir) {
+      return prev ? delta(a, b, dir) : '<span class="delta f">no prior month</span>';
+    };
     var tiles = [
       [money(cur.spend), "Ad spend", d(cur.spend, prev && prev.spend, "neutral")],
       [cur.clicks == null ? "—" : String(cur.clicks), "Clicks", d(cur.clicks, prev && prev.clicks, "neutral")],
@@ -388,13 +612,16 @@
     });
     $("chart").innerHTML = KEYS.map(function (k) {
       var e = M[k].enquiries || {};
+      // null means nobody was logging yet — different from a genuine zero.
+      var unlogged = (e.total == null);
       var total = e.total || 0, b = e.booked || 0, other = Math.max(0, total - b);
       var w = function (n) { return (n / max) * 100; };
       var segs = (b ? '<div class="seg b" style="width:' + w(b) + '%"></div>' : "") +
                  (other ? '<div class="seg w" style="width:' + w(other) + '%"></div>' : "");
-      return '<div class="mrow"><span class="ml">' + esc(shortMonth(k)) + "</span>" +
+      var label = unlogged ? "not logged" : (total ? total + (b ? " · " + b + " booked" : "") : "none");
+      return '<div class="mrow"><span class="ml">' + esc(M[k].label || shortMonth(k)) + "</span>" +
              '<div class="track">' + (segs || '<div class="seg zero"></div>') + "</div>" +
-             '<span class="mv">' + (total ? total + (b ? " · " + b + " booked" : "") : "none yet") + "</span></div>";
+             '<span class="mv">' + label + "</span></div>";
     }).join("");
   }
 
@@ -403,7 +630,9 @@
     return '<button class="mbtn" type="button" data-k="' + esc(k) + '" aria-pressed="false">' +
            esc(M[k].label || k) + "</button>";
   }).join("");
-  $("months").hidden = KEYS.length < 2;
+  // Always visible, even with a single month — the picker is how Joe knows
+  // past months are kept at all.
+  $("months").hidden = KEYS.length === 0;
 
   $("months").addEventListener("click", function (ev) {
     var b = ev.target.closest("button[data-k]");
