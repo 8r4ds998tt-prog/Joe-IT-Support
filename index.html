@@ -1,0 +1,418 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow, noarchive">
+<title>Priestley Practice — Search &amp; Ads</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,600&family=Karla:wght@400;500;700&display=swap">
+<style>
+  :root{
+    --paper:#f3f4f1; --card:#fcfcfb; --sunk:#eaece7;
+    --ink:#1d2521; --body:#3c4741; --muted:#6a7771; --rule:#d9ded8;
+    --green:#3d6b52; --green-sf:#e6efe8;
+    --booked:#2e7d54; --waiting:#3f5fc0;
+    --up:#2e7d54; --down:#8d3f33;
+    --serif:"Newsreader",Georgia,serif;
+    --sans:"Karla","Segoe UI",system-ui,sans-serif;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --paper:#121714; --card:#1a211d; --sunk:#212a25;
+      --ink:#e9efe9; --body:#c2ccc6; --muted:#8b978f; --rule:#2a342e;
+      --green:#7fbd96; --green-sf:#172a1f;
+      --booked:#3da06f; --waiting:#6b8cd8;
+      --up:#3da06f; --down:#dd8878;
+    }
+  }
+  :root[data-theme="dark"]{
+    --paper:#121714; --card:#1a211d; --sunk:#212a25;
+    --ink:#e9efe9; --body:#c2ccc6; --muted:#8b978f; --rule:#2a342e;
+    --green:#7fbd96; --green-sf:#172a1f;
+    --booked:#3da06f; --waiting:#6b8cd8;
+    --up:#3da06f; --down:#dd8878;
+  }
+  *{box-sizing:border-box}
+  html{color-scheme:light dark}
+  body{margin:0;background:var(--paper);color:var(--body);font-family:var(--sans);
+       font-size:16px;line-height:1.58;-webkit-font-smoothing:antialiased}
+  img{max-width:100%}
+  .page{max-width:46rem;margin:0 auto;padding-inline:18px;padding-block:36px 80px;
+        display:flex;flex-direction:column;gap:30px}
+  h1,h2{color:var(--ink);margin:0;text-wrap:balance}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,5vw,2.3rem);line-height:1.1}
+  h2{font-family:var(--serif);font-weight:600;font-size:1.2rem}
+  h3{margin:0;font-size:.97rem;font-weight:700;color:var(--ink)}
+  p{margin:0}
+  .stamp{font-size:.8rem;color:var(--muted);letter-spacing:.04em}
+  section{display:flex;flex-direction:column;gap:13px}
+
+  /* month picker */
+  .months{display:flex;flex-wrap:wrap;gap:7px}
+  .mbtn{font-family:var(--sans);font-size:.85rem;font-weight:500;cursor:pointer;
+        background:var(--card);color:var(--body);border:1px solid var(--rule);
+        border-radius:20px;padding:5px 14px}
+  .mbtn[aria-pressed="true"]{background:var(--green);border-color:var(--green);color:var(--card);font-weight:700}
+  .mbtn:focus-visible{outline:2px solid var(--green);outline-offset:2px}
+
+  .headline{background:var(--green-sf);border-left:3px solid var(--green);
+            border-radius:0 5px 5px 0;padding:18px 22px;
+            font-family:var(--serif);font-size:1.09rem;line-height:1.5;color:var(--ink)}
+
+  /* KPI */
+  .tiles{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--rule);
+         border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+  .tile{background:var(--card);padding:13px 15px;display:flex;flex-direction:column;gap:2px}
+  .tile .n{font-family:var(--serif);font-size:1.5rem;line-height:1.15;color:var(--ink);
+           font-variant-numeric:tabular-nums}
+  .tile .l{font-size:.72rem;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);font-weight:500}
+  .delta{font-size:.74rem;font-weight:700;font-variant-numeric:tabular-nums}
+  .delta.u{color:var(--up)} .delta.d{color:var(--down)} .delta.f{color:var(--muted);font-weight:500}
+
+  .card{background:var(--card);border:1px solid var(--rule);border-radius:6px;
+        padding:17px 19px;display:flex;flex-direction:column;gap:10px}
+  .flagrow{display:flex;gap:10px;align-items:flex-start;font-size:.93rem}
+  .flagrow .dot{width:8px;height:8px;border-radius:50%;flex:none;margin-top:.5em}
+
+  /* website checks */
+  .checks{display:flex;flex-direction:column;gap:1px;background:var(--rule);
+          border:1px solid var(--rule);border-radius:6px;overflow:hidden}
+  .chk{background:var(--card);padding:12px 15px;display:grid;
+       grid-template-columns:1fr auto;gap:2px 12px;align-items:baseline}
+  .chk .cl{color:var(--ink);font-weight:500;font-size:.95rem}
+  .chk .cn{font-size:.86rem;color:var(--muted);grid-column:1/-1}
+  .chk .cv{font-variant-numeric:tabular-nums;font-weight:700;font-size:.9rem;white-space:nowrap}
+  .chk .cv.ok{color:var(--booked)} .chk .cv.poor{color:var(--down)} .chk .cv.none{color:var(--down)}
+  .bar{grid-column:1/-1;height:4px;border-radius:2px;background:var(--sunk);overflow:hidden;margin-top:4px}
+  .bar i{display:block;height:100%;border-radius:2px}
+  .bar i.ok{background:var(--booked)} .bar i.poor{background:var(--down)} .bar i.none{background:var(--down)}
+
+  /* terms table */
+  .tw{overflow-x:auto;border:1px solid var(--rule);border-radius:6px;background:var(--card)}
+  table{border-collapse:collapse;width:100%;min-width:26rem;font-size:.89rem}
+  th,td{text-align:left;padding:9px 13px;border-bottom:1px solid var(--rule)}
+  th{font-size:.71rem;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);
+     font-weight:500;background:var(--sunk)}
+  tr:last-child td{border-bottom:0}
+  td.num{text-align:right;font-variant-numeric:tabular-nums}
+  td:first-child{color:var(--ink)}
+  .tag{font-size:.7rem;letter-spacing:.04em;text-transform:uppercase;padding:2px 7px;
+       border-radius:3px;white-space:nowrap;font-weight:700}
+  .tag.useful{background:var(--green-sf);color:var(--booked)}
+  .tag.wasted{background:var(--sunk);color:var(--down)}
+  .tag.unclear{background:var(--sunk);color:var(--muted)}
+
+  /* history chart */
+  .chart{display:flex;flex-direction:column;gap:9px}
+  .mrow{display:grid;grid-template-columns:4.6rem 1fr auto;gap:11px;align-items:center}
+  .mrow .ml{font-size:.83rem;color:var(--muted);font-variant-numeric:tabular-nums}
+  .track{display:flex;gap:2px;height:19px}
+  .seg{border-radius:3px;min-width:5px}
+  .seg.b{background:var(--booked)} .seg.w{background:var(--waiting)}
+  .seg.zero{width:100%;background:var(--sunk);border:1px dashed var(--rule);border-radius:3px}
+  .mrow .mv{font-size:.84rem;color:var(--ink);font-variant-numeric:tabular-nums;font-weight:500}
+  .legend{display:flex;flex-wrap:wrap;gap:14px;font-size:.82rem;color:var(--muted)}
+  .legend span{display:inline-flex;align-items:center;gap:6px}
+  .legend i{width:9px;height:9px;border-radius:50%;display:inline-block}
+
+  .insights{display:flex;flex-direction:column;gap:13px}
+  .insight{display:flex;flex-direction:column;gap:4px;padding-left:14px;border-left:2px solid var(--green)}
+  .insight p{font-size:.93rem}
+
+  .act{display:flex;flex-direction:column;gap:11px}
+  .act .item{display:flex;flex-direction:column;gap:2px;padding-left:13px;border-left:2px solid var(--rule)}
+  .act .top{display:flex;flex-wrap:wrap;gap:4px 10px;align-items:baseline}
+  .act .d{font-size:.76rem;color:var(--muted);font-variant-numeric:tabular-nums}
+  .act .m{font-size:.76rem;color:var(--green);font-weight:500}
+  .act .s{font-size:.93rem;color:var(--ink)}
+
+  ul.plain,ol.next{margin:0;padding-left:1.2rem;display:flex;flex-direction:column;gap:7px;font-size:.95rem}
+  ol.next li::marker{color:var(--green);font-weight:700}
+  ul.plain li::marker{color:var(--muted)}
+
+  .empty{color:var(--muted);font-size:.92rem;font-style:italic}
+  footer{border-top:1px solid var(--rule);padding-top:15px;font-size:.79rem;color:var(--muted);
+         display:flex;flex-direction:column;gap:4px}
+  [hidden]{display:none!important}
+
+  @media (min-width:560px){.tiles{grid-template-columns:repeat(3,1fr)}}
+  @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>Search &amp; ads</h1>
+    <p class="stamp" id="stamp"></p>
+  </header>
+
+  <div class="months" id="months" role="group" aria-label="Choose a month"></div>
+
+  <p class="headline" id="headline"></p>
+
+  <section>
+    <h2>The numbers</h2>
+    <p class="stamp" id="cmp"></p>
+    <div class="tiles" id="tiles"></div>
+    <div class="card" id="adsnote"></div>
+  </section>
+
+  <section id="sec-web">
+    <h2>The website</h2>
+    <p class="stamp" id="webstamp"></p>
+    <div class="card" id="rank"></div>
+    <div class="checks" id="checks"></div>
+    <div class="card" id="webnotes"></div>
+  </section>
+
+  <section id="sec-terms">
+    <h2>What people searched</h2>
+    <p class="stamp">The actual words typed into Google before your ad appeared. Anything marked wasted gets blocked.</p>
+    <div class="tw"><table>
+      <thead><tr><th>Search</th><th class="num">Clicks</th><th class="num">Cost</th><th>Verdict</th></tr></thead>
+      <tbody id="terms"></tbody>
+    </table></div>
+  </section>
+
+  <section id="sec-changes">
+    <h2>Changes made to the account</h2>
+    <ul class="plain" id="changes"></ul>
+  </section>
+
+  <section>
+    <h2>Track record</h2>
+    <p class="stamp">Every month so far. This is the one that matters in six months' time.</p>
+    <div class="chart" id="chart"></div>
+    <div class="legend">
+      <span><i style="background:var(--booked)"></i> Booked an assessment</span>
+      <span><i style="background:var(--waiting)"></i> Enquiry, not booked</span>
+    </div>
+  </section>
+
+  <section id="sec-insights">
+    <h2>Worth knowing</h2>
+    <div class="insights" id="insights"></div>
+  </section>
+
+  <section id="sec-act">
+    <h2>What I've been doing</h2>
+    <div class="act" id="act"></div>
+  </section>
+
+  <section id="sec-next">
+    <h2>Next up</h2>
+    <ol class="next" id="next"></ol>
+  </section>
+
+  <footer>
+    <span>Priestley Psychological Services &middot; prepared by Andrew</span>
+    <span>Private page &mdash; kept out of search results. No client names recorded here.</span>
+  </footer>
+</div>
+
+<script src="data.js"></script>
+<script>
+(function () {
+  var R = window.REPORT || {};
+  var M = R.months || {};
+  var KEYS = Object.keys(M).sort();
+  var MN = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+
+  var $ = function (id) { return document.getElementById(id); };
+  var esc = function (s) {
+    return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) {
+      return { "&":"&amp;", "<":"&lt;", ">":"&gt;", '"':"&quot;" }[c];
+    });
+  };
+  var money = function (n, dp) {
+    if (n == null || isNaN(n)) return null;
+    return "£" + Number(n).toFixed(dp || 0);
+  };
+  var pct = function (n) { return (n == null || isNaN(n)) ? null : Number(n).toFixed(1) + "%"; };
+  var shortMonth = function (k) {
+    var p = String(k).split("-");
+    return MN[Number(p[1]) - 1] + " " + p[0].slice(2);
+  };
+  var div = function (a, b) {
+    return (a == null || b == null || !b) ? null : a / b;
+  };
+
+  // --- derived metrics for one month -------------------------------------
+  function metrics(k) {
+    var m = M[k] || {};
+    var a = m.ads || {};
+    var e = m.enquiries || {};
+    return {
+      spend: a.spend == null ? null : a.spend,
+      clicks: a.clicks == null ? null : a.clicks,
+      impressions: a.impressions == null ? null : a.impressions,
+      ctr: div(a.clicks, a.impressions) == null ? null : div(a.clicks, a.impressions) * 100,
+      cpc: div(a.spend, a.clicks),
+      enquiries: e.total == null ? null : e.total,
+      booked: e.booked == null ? null : e.booked,
+      cpe: div(a.spend, e.total)
+    };
+  }
+
+  // --- delta badge --------------------------------------------------------
+  // lowerIsBetter: for cost metrics, a fall is good.
+  // dir: "up" = a rise is good, "down" = a fall is good,
+  //      "neutral" = neither direction is inherently good (spend, clicks —
+  //      spending less isn't a failure, and fewer clicks after blocking
+  //      wasted searches is the whole point). Neutral shows the movement
+  //      in grey so the page never implies a judgement it can't make.
+  function delta(now, was, dir) {
+    if (now == null || was == null || was === 0) return '<span class="delta f">—</span>';
+    var d = now - was;
+    if (Math.abs(d) < 1e-9) return '<span class="delta f">no change</span>';
+    var p = Math.round((d / Math.abs(was)) * 100);
+    var arrow = d > 0 ? "▲" : "▼";
+    var cls = dir === "neutral" ? "f" : ((dir === "down" ? d < 0 : d > 0) ? "u" : "d");
+    return '<span class="delta ' + cls + '">' + arrow + " " + Math.abs(p) + "%</span>";
+  }
+
+  // --- render one month ---------------------------------------------------
+  function render(key) {
+    var m = M[key] || {};
+    var idx = KEYS.indexOf(key);
+    var prevKey = idx > 0 ? KEYS[idx - 1] : null;
+    var cur = metrics(key);
+    var prev = prevKey ? metrics(prevKey) : null;
+
+    $("stamp").textContent = (m.label || key) + " · updated " + (R.updated || "");
+    $("headline").textContent = m.headline || "";
+
+    $("cmp").textContent = prevKey
+      ? "Compared with " + (M[prevKey].label || prevKey) + "."
+      : "First month on record, so there's nothing to compare against yet.";
+
+    var d = function (a, b, dir) { return prev ? delta(a, b, dir) : '<span class="delta f">—</span>'; };
+    var tiles = [
+      [money(cur.spend), "Ad spend", d(cur.spend, prev && prev.spend, "neutral")],
+      [cur.clicks == null ? "—" : String(cur.clicks), "Clicks", d(cur.clicks, prev && prev.clicks, "neutral")],
+      [pct(cur.ctr) || "—", "Click-through rate", d(cur.ctr, prev && prev.ctr, "up")],
+      [cur.enquiries == null ? "—" : String(cur.enquiries), "Enquiries", d(cur.enquiries, prev && prev.enquiries, "up")],
+      [cur.booked == null ? "—" : String(cur.booked), "Booked", d(cur.booked, prev && prev.booked, "up")],
+      [money(cur.cpe) || "—", "Cost per enquiry", d(cur.cpe, prev && prev.cpe, "down")]
+    ];
+    $("tiles").innerHTML = tiles.map(function (t) {
+      return '<div class="tile"><span class="n">' + esc(t[0] == null ? "—" : t[0]) + "</span>" +
+             '<span class="l">' + esc(t[1]) + "</span>" + t[2] + "</div>";
+    }).join("");
+
+    var a = m.ads || {};
+    $("adsnote").innerHTML =
+      '<div class="flagrow"><span class="dot" style="background:' +
+      (a.tracked ? "var(--booked)" : "var(--waiting)") + '"></span><div>' +
+      "<h3>" + (a.tracked ? "Enquiries are being tracked" : "Enquiries aren't being tracked yet") + "</h3>" +
+      "<p>" + esc(a.note || "") + "</p></div></div>";
+
+    // website health
+    var w = m.website;
+    $("sec-web").hidden = !w;
+    if (w) {
+      $("webstamp").textContent = "Measured from the live site on " + (w.checked || "") +
+                                  " · " + (w.pages || 0) + " pages.";
+      $("rank").innerHTML = '<div class="flagrow"><span class="dot" style="background:var(--booked)"></span>' +
+        "<div><h3>Where you already rank</h3><p>" + esc(w.ranking || "") + "</p></div></div>";
+      $("checks").innerHTML = (w.checks || []).map(function (c) {
+        var s = c.status || "poor";
+        var frac = (c.of ? (c.got / c.of) * 100 : 0);
+        return '<div class="chk"><span class="cl">' + esc(c.label) + "</span>" +
+               '<span class="cv ' + esc(s) + '">' + c.got + " of " + c.of + "</span>" +
+               '<span class="cn">' + esc(c.note || "") + "</span>" +
+               '<span class="bar"><i class="' + esc(s) + '" style="width:' + frac + '%"></i></span></div>';
+      }).join("");
+      $("webnotes").innerHTML =
+        (w.best ? "<div><h3>The best page you've got</h3><p>" + esc(w.best) + "</p></div>" : "") +
+        (w.thin ? '<div style="margin-top:10px"><h3>The thinnest pages</h3><p>' + esc(w.thin) + "</p></div>" : "");
+    }
+
+    // search terms
+    var terms = Array.isArray(m.terms) ? m.terms : [];
+    $("sec-terms").hidden = terms.length === 0;
+    $("terms").innerHTML = terms.map(function (t) {
+      var v = t.verdict || "unclear";
+      return "<tr><td>" + esc(t.term) + "</td>" +
+             '<td class="num">' + (t.clicks == null ? "—" : t.clicks) + "</td>" +
+             '<td class="num">' + (money(t.cost) || "—") + "</td>" +
+             '<td><span class="tag ' + esc(v) + '">' + esc(v) + "</span></td></tr>";
+    }).join("");
+
+    // account changes
+    var ch = Array.isArray(m.changes) ? m.changes : [];
+    $("sec-changes").hidden = ch.length === 0;
+    $("changes").innerHTML = ch.map(function (c) { return "<li>" + esc(c) + "</li>"; }).join("");
+
+    // insights
+    var ins = Array.isArray(m.insights) ? m.insights : [];
+    $("sec-insights").hidden = ins.length === 0;
+    $("insights").innerHTML = ins.map(function (i) {
+      return '<div class="insight"><h3>' + esc(i.title) + "</h3><p>" + esc(i.body) + "</p></div>";
+    }).join("");
+
+    // activity
+    var act = (Array.isArray(m.activity) ? m.activity.slice() : []);
+    act.sort(function (x, y) { return String(y.date).localeCompare(String(x.date)); });
+    $("sec-act").hidden = act.length === 0;
+    $("act").innerHTML = act.map(function (x) {
+      return '<div class="item"><div class="top"><span class="d">' + esc(x.date) + "</span>" +
+             (x.minutes ? '<span class="m">' + esc(x.minutes) + " min</span>" : "") +
+             '</div><span class="s">' + esc(x.summary) + "</span></div>";
+    }).join("");
+
+    // next
+    var nx = Array.isArray(m.next) ? m.next : [];
+    $("sec-next").hidden = nx.length === 0;
+    $("next").innerHTML = nx.map(function (n) { return "<li>" + esc(n) + "</li>"; }).join("");
+
+    // month buttons state
+    Array.prototype.forEach.call($("months").children, function (b) {
+      b.setAttribute("aria-pressed", String(b.dataset.k === key));
+    });
+  }
+
+  // --- history chart (all months, never changes with selection) -----------
+  function chart() {
+    if (!KEYS.length) {
+      $("chart").innerHTML = '<p class="empty">Once a month or two is logged, the pattern shows up here.</p>';
+      return;
+    }
+    var max = 1;
+    KEYS.forEach(function (k) {
+      var e = (M[k].enquiries || {});
+      max = Math.max(max, e.total || 0);
+    });
+    $("chart").innerHTML = KEYS.map(function (k) {
+      var e = M[k].enquiries || {};
+      var total = e.total || 0, b = e.booked || 0, other = Math.max(0, total - b);
+      var w = function (n) { return (n / max) * 100; };
+      var segs = (b ? '<div class="seg b" style="width:' + w(b) + '%"></div>' : "") +
+                 (other ? '<div class="seg w" style="width:' + w(other) + '%"></div>' : "");
+      return '<div class="mrow"><span class="ml">' + esc(shortMonth(k)) + "</span>" +
+             '<div class="track">' + (segs || '<div class="seg zero"></div>') + "</div>" +
+             '<span class="mv">' + (total ? total + (b ? " · " + b + " booked" : "") : "none yet") + "</span></div>";
+    }).join("");
+  }
+
+  // --- build month picker -------------------------------------------------
+  $("months").innerHTML = KEYS.slice().reverse().map(function (k) {
+    return '<button class="mbtn" type="button" data-k="' + esc(k) + '" aria-pressed="false">' +
+           esc(M[k].label || k) + "</button>";
+  }).join("");
+  $("months").hidden = KEYS.length < 2;
+
+  $("months").addEventListener("click", function (ev) {
+    var b = ev.target.closest("button[data-k]");
+    if (b) render(b.dataset.k);
+  });
+
+  chart();
+  render(M[R.current] ? R.current : KEYS[KEYS.length - 1]);
+})();
+</script>
+</body>
+</html>
